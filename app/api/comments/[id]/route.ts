@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { mockComments } from '@/lib/mock-comments'
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = params
+    const { id } = await params
     const body = await request.json()
     const { content } = body
 
@@ -34,9 +34,9 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = params
+    const { id } = await params
     const index = mockComments.findIndex(c => c.id === id)
     if (index === -1) {
       return NextResponse.json(
