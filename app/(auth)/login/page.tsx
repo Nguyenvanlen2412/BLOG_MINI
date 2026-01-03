@@ -24,7 +24,7 @@ export default function LoginPage() {
 
     try {
       // Gọi API đăng nhập
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }), // Gửi email và password lên server
